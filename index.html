@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dzikir Counter</title>
+
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="src/output.css">
+
+    <!-- Link Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/2.5.0/remixicon.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+
+    <style>
+        .font-jakarta {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .color-primary{
+            color: #064e30;
+        }
+    </style>
+</head>
+<body class="font-jakarta text-center bg-[#FFFDF5] min-h-screen">
+    <header class="pt-20">
+        <h1 class="color-primary font-bold text-4xl">Tasbih Digital</h1>
+        <p class="color-primary mt-2">Hitung Jumlah Dzikir Kamu disini</p>
+    </header>
+    <main>
+        <section class="mt-8">
+            <div class="flex flex-row gap-2 items-center justify-center">
+                <p class="color-primary">Target Dzikir:</p>
+                <span id="target" class="text-2xl font-bold">0</span>
+            </div>
+            <div class="flex justify-center my-2 bg-[#064e30] w-fit mx-auto rounded-sm border-2 border-[#064e30]">
+                <button class="bg-[#064e30] w-fit py-2 px-4 rounded-sm font-bold text-white hover:bg-[#fbd17f]"><span>11</span></button>
+                <button class="bg-[#FBD17F] w-fit py-2 px-4 rounded-sm font-bold color-primary hover:bg-[#064e30]"><span>33</span></button>
+                <button class="bg-[#064e30] w-fit py-2 px-4 rounded-sm font-bold text-white hover:bg-[#fbd17f]"><span>99</span></button>
+            </div>
+            <div>
+            <input class="border-2 border-[#064e30] py-2 px-2 text-sm rounded-md mt-4" type="number" name="" id="target-input" placeholder="Set target kustom">
+            <button class="bg-[#064e30] text-white py-2 px-4 text-sm rounded-md mt-2">Set Target</button>
+            </div>
+        </section>
+        <!-- Counter Section -->
+        <section class="mt-8">
+            <div class="counter-container">
+                <div class="counter-display w-36 h-36 bg-white rounded-md border-2 border-[#064e30] flex items-center justify-center mx-auto mb-4">
+                    <span id="counter" class="text-4xl font-bold">0</span>
+                </div>
+                <div class="buttons flex justify-center items-center gap-2 mt-10">
+                    <button id="reset-btn" class="bg-[#FBD17F] w-fit py-2 px-3 rounded-full font-bold text-[#064e30]"><i class="ri-refresh-line"></i></button>
+                    <button id="increment-btn" class="bg-[#064e30] w-fit px-6 py-5 rounded-full"><i class="ri-arrow-up-s-line text-6xl text-white"></i></button>
+                    <button id="decrement-btn" class="bg-[#FBD17F] w-fit py-2 px-3 rounded-full font-bold text-[#064e30]"><i class="ri-arrow-down-s-line"></i></button>
+                </div>
+            </div>
+        </section>
+        <div id="notification" class="fixed -top-20 left-0 right-0 z-50 transition-all duration-500 ease-in-out px-4">
+            <div class="bg-[#FBD17F] border-2 border-[#064e30] text-[#064e30] font-bold py-4 rounded-lg shadow-lg max-w-md mx-auto flex items-center justify-center gap-2">
+                <i class="ri-checkbox-circle-fill text-2xl"></i>
+                <span>Alhamdulillah! Target dzikir terpenuhi.</span>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <span class="bg-[#064e30] py-4 text-xs fixed bottom-0 left-0 right-0 text-center text-white">© 2023 Tasbih Digital by Afifa Quisha. All rights reserved.</span>
+    </footer>  
+
+    <!-- JS -->
+    <script src="main.js"></script>
+</body>
+</html>
