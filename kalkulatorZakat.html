@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalkulator Zakat</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+
+    <style>
+      .font-sans {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+    </style>
+  </head>
+  <body class="font-sans bg-[#FFFDF5] min-h-screen flex flex-col items-center justify-center p-4">
+    
+    <h1 class="text-center font-bold mb-6 text-3xl text-[#064e30]">Kalkulator Zakat</h1>
+    
+    <div class="bg-white border border-[#064e30] mx-auto p-6 rounded-xl items-center justify-center shadow-sm max-w-md w-full">
+      <div class="flex flex-col mb-6">
+        <label class="text-[#064e30] font-bold text-lg mb-2 text-center">Pilih Jenis Zakat</label>
+        <select id="zakat-type" class="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#064e30]">
+          <option value="penghasilan">Zakat Penghasilan</option>
+          <option value="emas">Zakat Emas</option>
+        </select>
+      </div>
+
+      <div class="flex flex-col gap-4 my-4">
+        <div class="flex flex-col">
+          <label class="text-[#064e30] font-medium mb-1 text-sm">Harga Emas per Gram (Rp)</label>
+          <input type="number" id="gold-price" placeholder="Contoh: 1450000" class="border border-[#064e30] rounded-md px-3 py-2" value="1450000" />
+        </div>
+
+        <div id="form-penghasilan" class="flex flex-col gap-y-4">
+          <div class="flex flex-col">
+            <label class="text-[#064e30] font-medium mb-1 text-sm">Gaji Bulanan (Rp)</label>
+            <input type="number" id="gaji" placeholder="10000000" class="border border-[#064e30] rounded-md px-3 py-2" />
+          </div>
+          <div class="flex flex-col">
+            <label class="text-[#064e30] font-medium mb-1 text-sm">Penghasilan Lain (Rp)</label>
+            <input type="number" id="penghasilan-lain" placeholder="0" class="border border-[#064e30] rounded-md px-3 py-2" />
+          </div>
+        </div>
+
+        <div id="form-emas" class="hidden flex flex-col">
+          <label class="text-[#064e30] font-medium mb-1 text-sm">Jumlah Simpanan Emas (gram)</label>
+          <input type="number" id="jumlah-emas" placeholder="Contoh: 100" class="border border-[#064e30] rounded-md px-3 py-2" />
+        </div>
+      </div>
+
+      <button id="calculate-btn" class="bg-[#064e30] text-white py-3 px-4 rounded-md w-full font-bold hover:bg-[#053b24] transition-colors mt-4">
+        Hitung Zakat
+      </button>
+      <button id="reset-btn" class="text-[#373737] text-center w-full mt-3 hover:text-[#064e30]" onclick="window.location.reload()">
+        Reset Kalkulator
+      </button>
+
+      <div id="result" class="mt-6">
+        </div>
+    </div>
+
+    <script>
+      function toggleForms() {
+        const zakatType = document.getElementById("zakat-type").value;
+        const formPenghasilan = document.getElementById("form-penghasilan");
+        const formEmas = document.getElementById("form-emas");
+
+        if (zakatType === "penghasilan") {
+          formPenghasilan.classList.remove("hidden");
+          formEmas.classList.add("hidden");
+        } else {
+          formPenghasilan.classList.add("hidden");
+          formEmas.classList.remove("hidden");
+        }
+        document.getElementById("result").innerHTML = "";
+      }
+
+      function calculateZakat() {
+        const zakatType = document.getElementById("zakat-type").value;
+        const goldPrice = parseFloat(document.getElementById("gold-price").value) || 0;
+        const resultDiv = document.getElementById("result");
+
+        if (goldPrice <= 0) {
+          resultDiv.innerHTML = `<p class="text-red-500 text-center font-medium">Input harga emas tidak valid!</p>`;
+          return;
+        }
+
+        let totalHarta = 0;
+        let nilaiNisab = 0;
+        let status = "";
+        let zakatHarusDibayar = 0;
+        let colorClass = "";
+
+        if (zakatType === "penghasilan") {
+          const gaji = parseFloat(document.getElementById("gaji").value) || 0;
+          const lain = parseFloat(document.getElementById("penghasilan-lain").value) || 0;
+          
+          totalHarta = gaji + lain;
+          nilaiNisab = (85 * goldPrice) / 12;
+
+          if (totalHarta >= nilaiNisab) {
+            status = "Wajib Zakat";
+            zakatHarusDibayar = totalHarta * 0.025;
+            colorClass = "text-green-600";
+          } else {
+            status = "Tidak Wajib Zakat";
+            zakatHarusDibayar = 0;
+            colorClass = "text-orange-500";
+          }
+
+        } else {
+          const gramEmas = parseFloat(document.getElementById("jumlah-emas").value) || 0;
+          totalHarta = gramEmas * goldPrice;
+          nilaiNisab = 85 * goldPrice;
+
+          if (gramEmas >= 85) {
+            status = "Wajib Zakat";
+            zakatHarusDibayar = totalHarta * 0.025;
+            colorClass = "text-green-600";
+          } else {
+            status = "Belum Wajib Zakat";
+            zakatHarusDibayar = 0;
+            colorClass = "text-orange-500";
+          }
+        }
+
+        resultDiv.innerHTML = `
+          <div class="bg-gray-50 p-4 rounded-lg border-t-4 border-[#064e30] font-sans">
+            <h4 class="text-center font-bold text-[#064e30] mb-4 underline">RINCIAN HASIL</h4>
+            <div class="space-y-3 text-sm">
+              <div class="flex justify-between border-b pb-1">
+                <span class="text-gray-600">Total Harta/Penghasilan</span>
+                <span class="font-bold text-gray-800">Rp ${Math.round(totalHarta).toLocaleString('id-ID')}</span>
+              </div>
+              <div class="flex justify-between border-b pb-1">
+                <span class="text-gray-600">Nilai Nisab (Batas)</span>
+                <span class="font-bold text-gray-800">Rp ${Math.round(nilaiNisab).toLocaleString('id-ID')}</span>
+              </div>
+              <div class="flex justify-between border-b pb-1">
+                <span class="text-gray-600">Status</span>
+                <span class="font-bold uppercase ${colorClass}">${status}</span>
+              </div>
+              <div class="flex justify-between pt-2">
+                <span class="text-[#064e30] font-bold text-base">Zakat Dibayar</span>
+                <span class="text-xl font-bold text-[#064e30]">Rp ${Math.round(zakatHarusDibayar).toLocaleString('id-ID')}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // 3. Event Listener
+      document.getElementById("zakat-type").addEventListener("change", toggleForms);
+      document.getElementById("calculate-btn").addEventListener("click", calculateZakat);
+
+      // Inisialisasi saat web dibuka
+      window.onload = toggleForms;
+    </script>
+  </body>
+</html>
