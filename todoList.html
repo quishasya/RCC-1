@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramadhan To-Do List</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        // Konfigurasi warna Tailwind agar sesuai dengan class yang kamu buat
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0C5C42', // Hijau gelap sesuai referensi
+                        background: '#F8F8F3',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .active-tab {
+            color: #0C5C42 !important;
+            text-decoration: underline;
+            font-weight: 700;
+        }
+        /* Sembunyikan section secara default */
+        section { display: none; }
+        /* Tampilkan section yang aktif */
+        section.active { display: block; }
+    </style>
+</head>
+<body class="font-sans bg-background pb-20">
+    <header class="text-center bg-primary py-12 text-white shadow-md">
+        <h1 class="font-semibold text-white text-2xl">🌙 Ramadhan To-Do List</h1>
+        <p id="motivation-text" class="font-light px-4">Track your daily activities during Ramadhan</p>
+    </header>
+
+    <nav class="bg-white py-4 px-10 flex justify-around gap-x-2 shadow-md sticky top-0 z-10">
+        <button onclick="switchTab('shalat')" class="nav-btn text-gray-500 hover:text-primary transition-colors duration-300">Shalat</button>
+        <button onclick="switchTab('quran')" class="nav-btn text-gray-500 hover:text-primary transition-colors duration-300">Quran</button>
+        <button onclick="switchTab('puasa')" class="nav-btn text-gray-500 hover:text-primary transition-colors duration-300">Puasa</button>
+        <button onclick="switchTab('dzikir')" class="nav-btn text-gray-500 hover:text-primary transition-colors duration-300">Dzikir</button>
+    </nav>
+
+    <main>
+        <div class="max-w-md mx-auto mt-6 bg-white py-8 px-6 rounded-lg shadow-sm">
+            <h2 class="text-xl font-semibold text-primary mb-4">Daily Progress</h2>
+            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                <div id="progress-bar" class="bg-primary h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+            <p id="progress-label" class="text-sm py-2 text-gray-500">0% Complete</p>
+        </div>
+
+        <section id="shalat" class="active mb-10">
+            <div class="max-w-md mx-auto mt-6 bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-xl font-semibold text-primary mb-4">Shalat Wajib</h2>
+                <div class="space-y-4" id="shalat-list">
+                    <label class="flex items-center gap-x-3 cursor-pointer">
+                        <input type="checkbox" data-idx="0" class="accent-primary w-5 h-5">
+                        <span class="text-gray-700">Shalat Subuh</span>
+                    </label>
+                    <label class="flex items-center gap-x-3 cursor-pointer">
+                        <input type="checkbox" data-idx="1" class="accent-primary w-5 h-5">
+                        <span class="text-gray-700">Shalat Dzuhur</span>
+                    </label>
+                    <label class="flex items-center gap-x-3 cursor-pointer">
+                        <input type="checkbox" data-idx="2" class="accent-primary w-5 h-5">
+                        <span class="text-gray-700">Shalat Ashar</span>
+                    </label>
+                    <label class="flex items-center gap-x-3 cursor-pointer">
+                        <input type="checkbox" data-idx="3" class="accent-primary w-5 h-5">
+                        <span class="text-gray-700">Shalat Maghrib</span>
+                    </label>
+                    <label class="flex items-center gap-x-3 cursor-pointer">
+                        <input type="checkbox" data-idx="4" class="accent-primary w-5 h-5">
+                        <span class="text-gray-700">Shalat Isya</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <section id="quran" class="mb-10">
+            <div class="max-w-md mx-auto mt-6 bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-xl font-semibold text-primary mb-4">Tilawah Qur'an</h2>
+                <div class="flex gap-4">
+                    <div class="flex-1">
+                        <label class="block text-sm text-gray-500 mb-1">Target Halaman</label>
+                        <input type="number" id="quran-target" class="w-full p-3 bg-gray-50 border rounded-lg mb-4" placeholder="0">
+                    </div>
+                    <div class="flex-1">
+                        <label class="block text-sm text-gray-500 mb-1">Halaman Dibaca</label>
+                        <input type="number" id="quran-current" class="w-full p-3 bg-gray-50 border rounded-lg mb-4" placeholder="0">
+                    </div>
+                </div>
+                <button onclick="saveQuran()" class="bg-primary text-white w-full py-2 px-4 rounded-lg hover:opacity-90 transition-all">Simpan</button>
+                <q class="block text-center text-sm italic text-gray-600 mt-6">Jadikan setiap huruf sebagai investasi akhirat...</q>
+            </div>
+        </section>
+
+        <section id="puasa" class="mb-10">
+            <div class="max-w-md mx-auto mt-6 bg-white p-6 rounded-lg shadow-sm text-center">
+                <h2 class="text-xl font-semibold text-primary mb-4">Puasa</h2>
+                <p class="text-gray-700 mb-4">Sudah berapa hari kamu berpuasa?</p>
+                <div class="grid grid-cols-6 gap-2" id="puasa-grid">
+                </div>
+                <button onclick="savePuasa()" class="bg-primary mt-4 text-white w-full py-2 px-4 rounded-lg hover:opacity-90 transition-all">Simpan</button>
+            </div> 
+        </section>
+
+        <section id="dzikir" class="mb-10">
+            <div class="max-w-md mx-auto mt-6 bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-xl font-semibold text-primary mb-4">Dzikir Pagi & Petang</h2>
+                <div class="space-y-4" id="dzikir-list">
+                    <label class="flex items-center gap-x-3 cursor-pointer">
+                        <input type="checkbox" data-idx="0" class="accent-primary w-5 h-5">
+                        <span class="text-gray-700">Dzikir Pagi</span>
+                    </label>
+                    <label class="flex items-center gap-x-3 cursor-pointer">
+                        <input type="checkbox" data-idx="1" class="accent-primary w-5 h-5">
+                        <span class="text-gray-700">Dzikir Petang</span>
+                    </label>
+                    <label class="flex items-center gap-x-3 cursor-pointer">
+                        <input type="checkbox" data-idx="2" class="accent-primary w-5 h-5">
+                        <span class="text-gray-700">Dzikir Setelah Shalat</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="text-center py-4 text-sm bg-primary text-white fixed left-0 right-0 bottom-0">
+        &copy; 2026 Ramadhan To-Do List.
+    </footer>
+
+    <script>
+        let ramadhanData = JSON.parse(localStorage.getItem('userProgress')) || {
+            shalat: [false, false, false, false, false],
+            dzikir: [false, false, false],
+            quran: { target: 0, current: 0 },
+            puasa: []
+        };
+
+        function switchTab(tabId) {
+            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active-tab');
+                if(btn.innerText.toLowerCase() === tabId) btn.classList.add('active-tab');
+            });
+        }
+
+        function updateUI() {
+            const shalatDone = ramadhanData.shalat.filter(x => x).length;
+            const shalatPct = (shalatDone / 5) * 100;
+
+            let quranPct = 0;
+            if(ramadhanData.quran.target > 0) {
+                quranPct = Math.min((ramadhanData.quran.current / ramadhanData.quran.target) * 100, 100);
+            }
+
+            const dzikirDone = ramadhanData.dzikir.filter(x => x).length;
+            const dzikirPct = (dzikirDone / 3) * 100;
+
+            const total = Math.round((shalatPct + quranPct + dzikirPct) / 3);
+            
+            document.getElementById('progress-bar').style.width = total + '%';
+            document.getElementById('progress-label').innerText = total + '% Complete';
+
+            const moti = document.getElementById('motivation-text');
+            if(total === 100) moti.innerText = "MasyaAllah lengkap! Pertahankan!";
+            else if(total > 40) moti.innerText = "Cukup baik, ayo selesaikan sisanya!";
+            else moti.innerText = "Belum optimal, semangat ya!";
+
+            localStorage.setItem('userProgress', JSON.stringify(ramadhanData));
+        }
+
+        function saveQuran() {
+            const t = parseInt(document.getElementById('quran-target').value) || 0;
+            const c = parseInt(document.getElementById('quran-current').value) || 0;
+            ramadhanData.quran = { target: t, current: c };
+            
+            const pct = (c/t) * 100;
+            if(pct >= 100) alert("Target tercapai!");
+            else if(pct >= 50) alert("Hampir selesai!");
+            else alert("Masih bisa ditambah!");
+            
+            updateUI();
+        }
+
+        function init() {
+            const shalatChecks = document.querySelectorAll('#shalat-list input');
+            shalatChecks.forEach((ch, i) => {
+                ch.checked = ramadhanData.shalat[i];
+                ch.addEventListener('change', (e) => {
+                    ramadhanData.shalat[i] = e.target.checked;
+                    updateUI();
+                });
+            });
+
+            const dzikirChecks = document.querySelectorAll('#dzikir-list input');
+            dzikirChecks.forEach((ch, i) => {
+                ch.checked = ramadhanData.dzikir[i];
+                ch.addEventListener('change', (e) => {
+                    ramadhanData.dzikir[i] = e.target.checked;
+                    updateUI();
+                });
+            });
+
+            document.getElementById('quran-target').value = ramadhanData.quran.target || "";
+            document.getElementById('quran-current').value = ramadhanData.quran.current || "";
+
+            const grid = document.getElementById('puasa-grid');
+            for(let i=1; i<=30; i++) {
+                const btn = document.createElement('button');
+                btn.className = "p-4 rounded-lg transition-all duration-300 font-bold";
+                
+                const isSelected = ramadhanData.puasa.includes(i);
+                btn.innerText = isSelected ? "✅" : i;
+                btn.classList.add(isSelected ? 'bg-primary' : 'bg-[#F3F4F6]');
+                btn.classList.add(isSelected ? 'text-white' : 'text-[#9CA3AF]');
+
+                btn.onclick = () => {
+                    if(ramadhanData.puasa.includes(i)) {
+                        ramadhanData.puasa = ramadhanData.puasa.filter(x => x !== i);
+                        btn.innerText = i;
+                        btn.className = "p-4 rounded-lg bg-[#F3F4F6] text-[#9CA3AF] font-bold";
+                    } else {
+                        ramadhanData.puasa.push(i);
+                        btn.innerText = "✅";
+                        btn.className = "p-4 rounded-lg bg-primary text-white font-bold";
+                    }
+                    updateUI();
+                };
+                grid.appendChild(btn);
+            }
+
+            switchTab('shalat');
+            updateUI();
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
