@@ -1,91 +1,96 @@
 <!doctype html>
-<html lang="id">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width,
-initial-scale=1.0"
-    />
-    <title>Doa Sahur & Buka Puasa</title>
-    <!-- Tailwind CSS -->
-    <link rel="stylesheet" href="src/output.css">
-    <!-- Google Font (Arabic) -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
-      rel="stylesheet"
-    />
-    <!-- Font Helper -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ramadhan Portal - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    
     <style>
-      .font-arabic {
-        font-family: "Amiri", serif;
-      }
-      .font-sans {
-        font-family: "Plus Jakarta Sans", sans-serif;
-      }
+      body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #F8F8F3; }
+      .bg-primary { background-color: #0C5C42; }
+      .text-primary { color: #0C5C42; }
+      .bg-accent { background-color: #F2CD80; }
     </style>
   </head>
-  <body class="bg-[#FFFDF5] text-gray-800 font-sans">
-    <!-- HEADER -->
-    <header class="bg-[#064e3b] text-white text-center py-6 border-b-4 border-b-[#f4be63]">
-      <h1 class="text-2xl font-semibold mb-2">🌙 Kumpulan Doa Ramadhan</h1>
-      <span class="text-sm">
-        Secuil panduan doa yang bisa kamu baca <br> saat sahur dan berbuka puasa.
-      </span>
-    </header>
-    <!-- MAIN -->
-    <main class="mx-auto px-4 py-10 bg-[#FFFDF5] lg:grid lg:grid-cols-2 lg:gap-x-10 lg:px-8 font-sans">
-        <!-- Doa Sahur -->
-        <section>
-            <div class="flex items-center mb-4">
-                <span class="bg-[#064e3b] py-2 px-3 font-bold text-white rounded-lg mr-2">01</span>
-                <h2 class="text-2xl font-bold text-[#064e3b]">Doa Sahur</h2>
-            </div>
-            <article class="bg-white px-4 py-6 rounded-lg border border-[#064e3b] hover:shadow-lg transition-shadow duration-300">
-                <span class="bg-[#FEF3C6] px-4 py-2 rounded-full">Doa Sebelum Makan</span>
-                <p class="font-arabic text-2xl text-center text-[#064e3b] mt-6">بِسْمِ اللَّهِ </p>
-                <p class="text-sm text-center text-gray-600 mt-4">"Bismillah"</p>
-                <p class="text-center mt-4"><span class="text-[#064e3b] font-bold">Artinya:</span> Dengan Menyebut Nama Allah</p>
-            </article>
-            <article class="bg-white px-4 py-6 mt-4 rounded-lg border border-[#064e3b] hover:shadow-lg transition-shadow duration-300">
-                <span class="bg-[#FEF3C6] px-4 py-2 rounded-full">Doa Setelah Makan</span>
-                <p class="font-arabic text-2xl leading-12 text-center text-[#064e3b] mt-6">الْحَمْدُ لِلَّهِ الَّذِى أَطْعَمَنِى هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّى وَلاَ قُوَّةٍ </p>
-                <p class="text-sm text-center text-gray-600 mt-4">"Alhamdu lillaahilladzii ath'amanii haadzaa wa rozaqoniihi min ghoiri haulin minnii wa laa quwwatin"</p>
-                <p class="text-justify mt-4"><span class="text-[#064e3b] font-bold">Artinya:</span> Segala puji bagi Allah yang telah memberi makan saya dengan ini dan memberi rezeki saya tanpa kekuatan atau kemampuan dari saya sendiri</p>
-            </article>
-        </section>
-        <!-- Doa Buka -->
-        <section class="mt-4 md:mt-0">
-            <div class="flex items-center mb-4">
-                <span class="bg-[#064e3b] py-2 px-3 text-white font-bold rounded-lg mr-2">02</span>
-                <h2 class="text-2xl font-bold text-[#064e3b]">Doa Buka</h2>
-            </div>
-            <article class="bg-white px-4 py-6 rounded-lg border border-[#064e3b] hover:shadow-lg transition-shadow duration-300">
-                <span class="bg-[#FEF3C6] px-4 py-2 rounded-full">Doa Berbuka Puasa</span>
-                <p class="font-arabic text-2xl text-center text-[#064e3b] mt-10"> ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ وَثَبَتَ الأَجْرُ إِنْ شَاءَ اللَّهُ </p>
-                <p class="text-sm text-center text-gray-600 mt-4">"Dzahabadh zhoma’u wabtallatil ‘uruqu wa tsabatal ajru insya Allah"</p>
-                <p class="text-justify mt-4"><span class="text-[#064e3b] font-bold">Artinya:</span> Rasa haus telah hilang dan urat-urat telah basah, dan pahala telah ditetapkan insya Allah” (HR. Abu Daud no. 2357)</p>
-            </article>
-        </section>
-      <!--
-TUGAS SISWA:
-1. Buat 2 section: Sahur & Buka Puasa
-2. Gunakan <section> dan <article>
-3. Gunakan class font-arabic untuk teks Arab
-4. Styling dengan Tailwind agar rapi & responsif
--->
+  <body class="min-h-screen flex flex-col">
 
+    <nav class="bg-primary text-white py-4 px-6 sticky top-0 z-50 shadow-md">
+      <div class="max-w-6xl mx-auto flex justify-between items-center">
+        <h1 class="text-xl font-medium flex items-center gap-2">
+          <span>🌙</span> Ramadhan Portal
+        </h1>
+        <div class="hidden md:flex gap-6 text-sm font-semibold">
+          <a href="index.html" class="text-accent border-b-2 border-accent">Beranda</a>
+          <a href="doa-doa.html" class="hover:text-accent transition">Doa harian</a>
+          <a href="jadwalImsak.html" class="hover:text-accent transition">Jadwal Imsakiyah</a>
+          <a href="todo.html" class="hover:text-accent transition">Ramadhan Check</a>
+        </div>
+      </div>
+    </nav>
+
+    <header class="bg-primary text-white py-16 px-6 text-center">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">Selamat Datang di Ramadhan Portal  </h2>
+        <p class="text-emerald-100 text-lg opacity-90">Sempurnakan ibadahmu di bulan suci dengan panduan doa, jadwal imsakiyah, dan checklist amalan harian.</p>
+      </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 -mt-10 mb-20 w-full">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <a href="doa-doa.html" class="bg-white p-8 rounded-2xl shadow-xl hover:translate-y-[-5px] transition-all group border border-emerald-50">
+          <div class="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center text-3xl mb-6 group-hover:bg-accent transition-colors">🤲</div>
+          <h3 class="text-xl font-bold text-primary mb-2">Doa-Doa</h3>
+          <p class="text-gray-500 text-sm">Kumpulan doa sahur, buka puasa, dan doa harian lainnya.</p>
+          <div class="mt-4 text-primary font-bold flex items-center gap-2 text-sm">
+            Buka Menu <span>&rarr;</span>
+          </div>
+        </a>
+
+        <a href="tasbihDigital.html" class="bg-white p-8 rounded-2xl shadow-xl hover:translate-y-[-5px] transition-all group border border-emerald-50">
+          <div class="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center text-3xl mb-6 group-hover:bg-accent transition-colors">📿</div>
+          <h3 class="text-xl font-bold text-primary mb-2">Tasbih Digital</h3>
+          <p class="text-gray-500 text-sm">Hitung jumlah dzikir dengan mudah menggunakan tasbih digital.</p>
+          <div class="mt-4 text-primary font-bold flex items-center gap-2 text-sm">
+            Hitung Dzikir <span>&rarr;</span>
+          </div>
+        </a>
+
+        <a href="kalkulatorZakat.html" class="bg-white p-8 rounded-2xl shadow-xl hover:translate-y-[-5px] transition-all group border border-emerald-50">
+          <div class="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center text-3xl mb-6 group-hover:bg-accent transition-colors">💰</div>
+          <h3 class="text-xl font-bold text-primary mb-2">Kalkulator Zakat</h3>
+          <p class="text-gray-500 text-sm">Hitung zakat fitrah dan zakat mal dengan mudah.</p>
+          <div class="mt-4 text-primary font-bold flex items-center gap-2 text-sm">
+            Hitung Zakat <span>&rarr;</span>
+          </div>
+        </a>
+
+        <a href="jadwalImsak.html" class="bg-white p-8 rounded-2xl shadow-xl hover:translate-y-[-5px] transition-all group border border-emerald-50">
+          <div class="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center text-3xl mb-6 group-hover:bg-accent transition-colors">⏳</div>
+          <h3 class="text-xl font-bold text-primary mb-2">Jadwal Imsakiyah</h3>
+          <p class="text-gray-500 text-sm">Cek jadwal sholat dan waktu imsak di seluruh kota Indonesia.</p>
+          <div class="mt-4 text-primary font-bold flex items-center gap-2 text-sm">
+            Cek Jadwal <span>&rarr;</span>
+          </div>
+        </a>
+
+        <a href="todoList.html" class="bg-white p-8 rounded-2xl shadow-xl hover:translate-y-[-5px] transition-all group border border-emerald-50">
+          <div class="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center text-3xl mb-6 group-hover:bg-accent transition-colors">✅</div>
+          <h3 class="text-xl font-bold text-primary mb-2">Ramadhan Check</h3>
+          <p class="text-gray-500 text-sm">Pantau progres tilawah, shalat, dan amalan harianmu.</p>
+          <div class="mt-4 text-primary font-bold flex items-center gap-2 text-sm">
+            Mulai Pantau <span>&rarr;</span>
+          </div>
+        </a>
+
+      </div>
     </main>
 
-    <!-- FOOTER -->
-    <footer
-      class="lg:absolute lg:bottom-0 w-screen text-center text-xs bg-[#064e3b] text-white py-4"
-    >
-      © 2026 Web Ramadhan
+    <footer class="mt-auto py-8 text-center text-gray-400 text-sm border-t">
+      <p>&copy; 2026 Ramadhan Portal • Dibuat dengan penuh berkah</p>
     </footer>
+
   </body>
 </html>

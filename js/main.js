@@ -4,11 +4,11 @@ const targetInput = document.getElementById('target-input');
 const notification = document.getElementById('notification');
 
 const incrementBtn = document.getElementById('increment-btn');
-const decrementBtn = document.getElementById('decrement-btn'); // Pastikan di HTML id="decrement-btn"
+const decrementBtn = document.getElementById('decrement-btn'); 
 const resetBtn = document.getElementById('reset-btn');
 
 const presetButtonsList = document.querySelectorAll('.flex.justify-center.my-2 button');
-const customTargetBtn = document.querySelector('#target-input + button');
+const customTargetBtn = document.getElementById('set-target-btn'); 
 
 let count = 0;
 let target = 0;

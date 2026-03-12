@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dzikir Counter</title>
 
-    <!-- Link CSS -->
-    <link rel="stylesheet" href="src/output.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    <!-- Link Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/2.5.0/remixicon.css">
-
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
 
     <style>
@@ -20,14 +18,51 @@
         .color-primary{
             color: #064e30;
         }
+        /* Tambahan agar background konsisten dengan halaman lain */
+        .bg-background {
+            background-color: #FFFDF5;
+        }
     </style>
 </head>
 <body class="font-jakarta text-center bg-background min-h-screen">
-    <header class="pt-20">
+
+    <nav class="bg-[#064e30] text-white py-4 px-6 sticky top-0 z-50 shadow-md w-full text-left" x-data="{ isOpen: false }">
+      <div class="max-w-6xl mx-auto flex justify-between items-center">
+        <a href="index.html" class="text-xl font-bold flex items-center gap-2">
+          <span>🌙</span> <span>Ramadhan Portal</span>
+        </a>
+
+        <div class="hidden md:flex gap-8 text-sm font-semibold">
+          <a href="index.html" class="hover:text-[#F2CD80] transition text-white">Beranda</a>
+          <a href="doa-doa.html" class="hover:text-[#F2CD80] transition text-white">Doa</a>
+          <a href="jadwalImsak.html" class="hover:text-[#F2CD80] transition text-white">Imsakiyah</a>
+          <a href="zakat.html" class="hover:text-[#F2CD80] transition text-white">Zakat</a>
+          <a href="tasbih.html" class="text-[#F2CD80]">Tasbih</a>
+        </div>
+
+        <button @click="isOpen = !isOpen" class="md:hidden text-2xl focus:outline-none">
+          <span x-show="!isOpen">≡</span>
+          <span x-show="isOpen">✕</span>
+        </button>
+      </div>
+
+      <div x-show="isOpen" class="md:hidden bg-[#053f2a] absolute top-full left-0 w-full border-t border-emerald-800 shadow-xl">
+        <div class="flex flex-col p-4 space-y-4 font-medium">
+          <a href="index.html" class="hover:text-[#F2CD80] py-2 border-b border-emerald-800 text-white">Beranda</a>
+          <a href="doa-doa.html" class="hover:text-[#F2CD80] py-2 border-b border-emerald-800 text-white">Doa Harian</a>
+          <a href="jadwalImsak.html" class="hover:text-[#F2CD80] py-2 border-b border-emerald-800 text-white">Jadwal Imsakiyah</a>
+          <a href="zakat.html" class="hover:text-[#F2CD80] py-2 border-b border-emerald-800 text-white">Kalkulator Zakat</a>
+          <a href="tasbih.html" class="text-[#F2CD80] py-2">Tasbih Digital</a>
+        </div>
+      </div>
+    </nav>
+
+    <header class="pt-12">
         <h1 class="color-primary font-bold text-4xl">Tasbih Digital</h1>
         <p class="color-primary mt-2">Hitung Jumlah Dzikir Kamu disini</p>
     </header>
-    <main>
+
+    <main class="pb-24">
         <section class="mt-8">
             <div class="flex flex-row gap-2 items-center justify-center">
                 <p class="color-primary">Target Dzikir:</p>
@@ -39,35 +74,36 @@
                 <button class="bg-[#064e30] w-fit py-2 px-4 rounded-sm font-bold text-white hover:bg-[#fbd17f]"><span>99</span></button>
             </div>
             <div>
-            <input class="border-2 border-[#064e30] py-2 px-2 text-sm rounded-md mt-4" type="number" name="" id="target-input" placeholder="Set target kustom">
-            <button class="bg-[#064e30] text-white py-2 px-4 text-sm rounded-md mt-2">Set Target</button>
+                <input class="border-2 border-[#064e30] py-2 px-2 text-sm rounded-md mt-4" type="number" id="target-input" placeholder="Set target kustom">
+                <button id="set-target-btn" class="bg-[#064e30] text-white py-2 px-4 text-sm rounded-md mt-2">Set Target</button>
             </div>
         </section>
-        <!-- Counter Section -->
+
         <section class="mt-8">
             <div class="counter-container">
                 <div class="counter-display w-36 h-36 bg-white rounded-md border-2 border-[#064e30] flex items-center justify-center mx-auto mb-4">
                     <span id="counter" class="text-4xl font-bold">0</span>
                 </div>
-                <div class="buttons flex justify-center items-center gap-2 mt-10">
-                    <button id="reset-btn" class="bg-background w-fit py-2 px-3 rounded-full font-bold text-[#064e30]"><i class="ri-refresh-line"></i></button>
-                    <button id="increment-btn" class="bg-[#064e30] w-fit px-6 py-5 rounded-full"><i class="ri-arrow-up-s-line text-6xl text-white"></i></button>
-                    <button id="decrement-btn" class="bg-background w-fit py-2 px-3 rounded-full font-bold text-[#064e30]"><i class="ri-arrow-down-s-line"></i></button>
+                <div class="buttons flex justify-center items-center gap-4 mt-10">
+                    <button id="reset-btn" class="bg-white border border-gray-200 w-fit py-2 px-3 rounded-full font-bold text-[#064e30] shadow-sm active:scale-95 transition-transform"><i class="ri-refresh-line"></i></button>
+                    <button id="increment-btn" class="bg-[#064e30] w-fit px-8 py-6 rounded-full shadow-lg active:scale-90 transition-transform"><i class="ri-arrow-up-s-line text-6xl text-white"></i></button>
+                    <button id="decrement-btn" class="bg-white border border-gray-200 w-fit py-2 px-3 rounded-full font-bold text-[#064e30] shadow-sm active:scale-95 transition-transform"><i class="ri-arrow-down-s-line"></i></button>
                 </div>
             </div>
         </section>
+
         <div id="notification" class="fixed -top-20 left-0 right-0 z-50 transition-all duration-500 ease-in-out px-4">
-            <div class="bg-background border-2 border-[#064e30] text-[#064e30] font-bold py-4 rounded-lg shadow-lg max-w-md mx-auto flex items-center justify-center gap-2">
+            <div class="bg-white border-2 border-[#064e30] text-[#064e30] font-bold py-4 rounded-lg shadow-lg max-w-md mx-auto flex items-center justify-center gap-2">
                 <i class="ri-checkbox-circle-fill text-2xl"></i>
                 <span>Alhamdulillah! Target dzikir terpenuhi.</span>
             </div>
         </div>
     </main>
+
     <footer>
-        <span class="bg-[#064e30] py-4 text-xs fixed bottom-0 left-0 right-0 text-center text-white">© 2023 Tasbih Digital by Afifa Quisha. All rights reserved.</span>
+        <span class="bg-[#064e30] py-4 text-xs fixed bottom-0 left-0 right-0 text-center text-white">© 2026 Ramadhan Portal • Tasbih Digital by Afifa Quisha</span>
     </footer>  
 
-    <!-- JS -->
-    <script src="main.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

@@ -846,13 +846,6 @@
     --tw-ease: var(--ease-in-out);
     transition-timing-function: var(--ease-in-out);
   }
-  .hover\:bg-\[\#06\] {
-    &:hover {
-      @media (hover: hover) {
-        background-color: #06;
-      }
-    }
-  }
   .hover\:bg-\[\#053b24\] {
     &:hover {
       @media (hover: hover) {
@@ -871,13 +864,6 @@
     &:hover {
       @media (hover: hover) {
         background-color: #043622;
-      }
-    }
-  }
-  .hover\:bg-\[\#\] {
-    &:hover {
-      @media (hover: hover) {
-        background-color: #;
       }
     }
   }

@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ramadhan To-Do List</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
     <script>
-        // Konfigurasi warna Tailwind agar sesuai dengan class yang kamu buat
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#0C5C42', // Hijau gelap sesuai referensi
+                        primary: '#0C5C42', 
                         background: '#F8F8F3',
                     },
                     fontFamily: {
@@ -32,19 +32,53 @@
             text-decoration: underline;
             font-weight: 700;
         }
-        /* Sembunyikan section secara default */
         section { display: none; }
-        /* Tampilkan section yang aktif */
         section.active { display: block; }
     </style>
 </head>
 <body class="font-sans bg-background pb-20">
+
+    <nav class="bg-primary text-white py-4 px-6 sticky top-0 z-50 shadow-md" x-data="{ isOpen: false }">
+      <div class="max-w-6xl mx-auto flex justify-between items-center">
+        <a href="index.html" class="text-xl font-bold flex items-center gap-2">
+          <span>🌙</span> <span>Ramadhan Portal</span>
+        </a>
+
+        <div class="hidden md:flex gap-8 text-sm font-semibold">
+          <a href="index.html" class="hover:text-[#F2CD80] transition text-gray-200">Beranda</a>
+          <a href="doa-doa.html" class="hover:text-[#F2CD80] transition text-gray-200">Doa</a>
+          <a href="jadwalImsak.html" class="hover:text-[#F2CD80] transition text-gray-200">Imsakiyah</a>
+          <a href="zakat.html" class="hover:text-[#F2CD80] transition text-gray-200">Zakat</a>
+          <a href="todo.html" class="text-[#F2CD80]">Checklist</a>
+        </div>
+
+        <button @click="isOpen = !isOpen" class="md:hidden text-2xl focus:outline-none">
+          <span x-show="!isOpen">≡</span>
+          <span x-show="isOpen">✕</span>
+        </button>
+      </div>
+
+      <div x-show="isOpen" 
+           x-transition:enter="transition ease-out duration-200"
+           x-transition:enter-start="opacity-0 -translate-y-4"
+           x-transition:enter-end="opacity-100 translate-y-0"
+           class="md:hidden bg-[#094a35] absolute top-full left-0 w-full border-t border-emerald-800 shadow-xl">
+        <div class="flex flex-col p-4 space-y-4 font-medium">
+          <a href="index.html" class="hover:text-[#F2CD80] py-2 border-b border-emerald-800 text-white">Beranda</a>
+          <a href="doa-doa.html" class="hover:text-[#F2CD80] py-2 border-b border-emerald-800 text-white">Doa Harian</a>
+          <a href="jadwalImsak.html" class="hover:text-[#F2CD80] py-2 border-b border-emerald-800 text-white">Jadwal Imsakiyah</a>
+          <a href="zakat.html" class="hover:text-[#F2CD80] py-2 border-b border-emerald-800 text-white">Kalkulator Zakat</a>
+          <a href="todo.html" class="text-[#F2CD80] py-2">Ramadhan Checklist</a>
+        </div>
+      </div>
+    </nav>
+
     <header class="text-center bg-primary py-12 text-white shadow-md">
         <h1 class="font-semibold text-white text-2xl">🌙 Ramadhan To-Do List</h1>
         <p id="motivation-text" class="font-light px-4">Track your daily activities during Ramadhan</p>
     </header>
 
-    <nav class="bg-white py-4 px-10 flex justify-around gap-x-2 shadow-md sticky top-0 z-10">
+    <nav class="bg-white py-4 px-10 flex justify-around gap-x-2 shadow-md sticky top-[64px] z-10">
         <button onclick="switchTab('shalat')" class="nav-btn text-gray-500 hover:text-primary transition-colors duration-300">Shalat</button>
         <button onclick="switchTab('quran')" class="nav-btn text-gray-500 hover:text-primary transition-colors duration-300">Quran</button>
         <button onclick="switchTab('puasa')" class="nav-btn text-gray-500 hover:text-primary transition-colors duration-300">Puasa</button>
@@ -137,11 +171,12 @@
         </section>
     </main>
     
-    <footer class="text-center py-4 text-sm bg-primary text-white fixed left-0 right-0 bottom-0">
+    <footer class="text-center py-4 text-sm bg-primary text-white fixed left-0 right-0 bottom-0 z-50">
         &copy; 2026 Ramadhan To-Do List.
     </footer>
 
     <script>
+        // Logika JavaScript kamu tetap sama
         let ramadhanData = JSON.parse(localStorage.getItem('userProgress')) || {
             shalat: [false, false, false, false, false],
             dzikir: [false, false, false],

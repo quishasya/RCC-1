@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jadwal Imsakiyah - Ramadhan 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -42,8 +43,34 @@
 </head>
 <body class="pb-10">
 
+    <nav class="bg-[#0C5C42] text-white py-4 px-6 sticky top-0 z-50 shadow-md" x-data="{ isOpen: false }">
+      <div class="max-w-6xl mx-auto flex justify-between items-center">
+        <a href="index.html" class="text-xl font-bold flex items-center gap-2">
+          <span>🌙</span> <span>Ramadhan Portal</span>
+        </a>
+        <div class="hidden md:flex gap-8 text-sm font-semibold">
+          <a href="index.html" class="hover:text-[#F2CD80] transition">Beranda</a>
+          <a href="doa-doa.html" class="hover:text-[#F2CD80] transition">Doa</a>
+          <a href="jadwalImsak.html" class="text-[#F2CD80]">Imsakiyah</a>
+          <a href="todo.html" class="hover:text-[#F2CD80] transition">Checklist</a>
+        </div>
+        <button @click="isOpen = !isOpen" class="md:hidden text-2xl focus:outline-none">
+          <span x-show="!isOpen">≡</span>
+          <span x-show="isOpen">✕</span>
+        </button>
+      </div>
+      <div x-show="isOpen" class="md:hidden bg-[#094a35] absolute top-full left-0 w-full border-t border-emerald-800 shadow-xl">
+        <div class="flex flex-col p-4 space-y-4 font-medium">
+          <a href="index.html" class="hover:text-[#F2CD80] py-2 border-b border-emerald-800">Beranda</a>
+          <a href="doa-doa.html" class="hover:text-[#F2CD80] py-2 border-b border-emerald-800">Doa Harian</a>
+          <a href="jadwalImsak.html" class="text-[#F2CD80] py-2 border-b border-emerald-800">Jadwal Imsakiyah</a>
+          <a href="todo.html" class="hover:text-[#F2CD80] py-2">Ramadhan Check</a>
+        </div>
+      </div>
+    </nav>
+
     <header class="bg-[#0C5C42] text-white py-10 px-6 text-center shadow-lg">
-        <h1 class="text-3xl font-bold">🌙 Jadwal Imsak</h1>
+        <h1 class="text-2xl font-bold">🌙 Jadwal Imsak</h1>
     </header>
 
     <main class="max-w-5xl mx-auto mt-8 px-4">
@@ -85,7 +112,7 @@
                     </tr>
                 </thead>
                 <tbody id="schedule-body" class="text-gray-700 divide-y divide-gray-100">
-                    </tbody>
+                </tbody>
             </table>
         </div>
     </main>
